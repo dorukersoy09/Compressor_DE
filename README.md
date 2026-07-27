@@ -153,7 +153,11 @@ Some planned improvements include:
 
 ## Screenshots
 
-*Screenshots will be added as the project evolves.*
+<img width="1010" height="732" alt="Screenshot 2026-07-27 at 22 48 33" src="https://github.com/user-attachments/assets/bf88d389-2b7c-49c4-bcd6-866e2f25f906" />
+<img width="1005" height="728" alt="Screenshot 2026-07-27 at 22 48 54" src="https://github.com/user-attachments/assets/d946e65e-9f40-4fb4-84d2-e2cf41d7dc4e" />
+<img width="999" height="728" alt="Screenshot 2026-07-27 at 22 51 06" src="https://github.com/user-attachments/assets/949a5953-f181-46b8-9482-f01b752a52ed" />
+
+
 
 ---
 
@@ -201,5 +205,7 @@ Developed as a personal software engineering project to explore Python desktop a
 
 ## License
 
-This project is licensed under the MIT License. See the LICENSE file for more information.
+Copyright © 2026 Doruk Ersoy. All rights reserved.
+
+This project is the intellectual property of Doruk Ersoy and is provided for portfolio and educational purposes only. No part of this project may be copied, modified, distributed, or used commercially without prior written permission from the author.
 
