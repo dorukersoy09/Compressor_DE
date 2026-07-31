@@ -1,182 +1,208 @@
-# Compressor_DE
+# DECompressor
 
-A desktop image compression and optimization application built with Python and PyQt5. DECompressor allows users to compress images while maintaining visual quality, resize images, convert between multiple formats, preview the compressed result before saving, and edit image metadata through an intuitive drag-and-drop interface.
+A desktop image compression and optimization application built with **Python and PyQt5**.
 
----
-
-## Overview
-
-DECompressor was created as a personal project to learn desktop application development, image processing, and graphical user interface design with Python. The application focuses on making image compression simple while giving users control over quality, resolution, output format, and metadata.
-
-Instead of using command-line tools, DECompressor provides an easy-to-use graphical interface where users can simply drag an image into the application, adjust compression settings, preview the result, and save the optimized image to any location.
+DECompressor allows users to reduce image file sizes while maintaining visual quality through adjustable compression settings, resizing tools, format conversion, metadata management, and real-time preview. The application provides a simple drag-and-drop workflow similar to professional image optimization tools while giving users detailed control over the compression process.
 
 ---
 
-## Features
+# Overview
 
-* Drag and drop image importing
-* Live image preview
-* Adjustable JPEG/WebP compression quality
-* Image resizing while preserving aspect ratio
-* Multiple output formats
+DECompressor was developed as a personal software engineering project focused on desktop application development, image processing, and user interface design.
 
-  * JPEG
-  * PNG
-  * WEBP
-  * BMP
-* Metadata preservation
-* Metadata editing
+The goal of the project was to create a lightweight but powerful image optimization tool that allows users to:
 
-  * Camera model
-  * Artist
-  * Description
-  * Copyright
-  * Date Taken
-* Preview compressed image before saving
-* Download compressed image to any location
-* Clean and modular user interface built with PyQt5
+- Reduce image file size
+- Preserve or modify image metadata
+- Convert between different image formats
+- Preview compression results before exporting
+- Control output quality and resolution
+
+Instead of relying on command-line utilities, DECompressor provides a complete graphical workflow where users can import an image, customize optimization settings, preview changes, and export the final result.
 
 ---
 
-## Technologies Used
+# Features
 
-* Python 3
-* PyQt5
-* Pillow (PIL)
-* piexif
+## Image Processing
+
+- Drag-and-drop image importing
+- Real-time image preview
+- Adjustable compression quality
+- Image resizing with aspect ratio preservation
+- Compression optimization for smaller file sizes
+- Before-save preview system
+
+## Supported Formats
+
+Input and output support:
+
+- JPEG
+- PNG
+- WEBP
+- BMP
+
+## Metadata Management
+
+DECompressor supports reading and modifying EXIF metadata.
+
+Editable metadata fields include:
+
+- Camera Model
+- Artist
+- Image Description
+- Copyright Information
+- Date Taken
+
+Users can choose whether metadata should be preserved during compression.
+
+## User Interface
+
+- Modern desktop interface built with PyQt5
+- Modular component-based design
+- Dedicated compression controls
+- Drag-and-drop workflow
+- Image preview system
+- File export functionality
 
 ---
 
-## Project Structure
+# Technologies Used
 
-```text
+| Technology | Purpose |
+|---|---|
+| Python 3 | Core application language |
+| PyQt5 | Desktop graphical interface |
+| Pillow (PIL) | Image processing and manipulation |
+| piexif | EXIF metadata handling |
+
+---
+
+# Project Architecture
+
+```
 DECompressor/
 │
 ├── UI.py                 # Main application window
-├── DragDrop.py           # Drag-and-drop image widget
-├── controles.py          # Control panel (quality, format, width, buttons)
+├── DragDrop.py           # Drag and drop image importing
+├── controles.py          # Compression controls and settings
 ├── MetadataWidget.py     # Metadata editing interface
-├── metadata.py           # Reads image metadata
-├── compressor.py         # Image compression engine
+│
+├── metadata.py            # EXIF metadata extraction
+├── compressor.py          # Compression engine
 │
 ├── requirements.txt
 └── README.md
 ```
 
----
+The project follows a modular structure where:
 
-## How It Works
-
-### 1. Import an Image
-
-Drag and drop an image into the preview area.
-
----
-
-### 2. Configure Compression
-
-Users can choose:
-
-* Compression quality
-* Output width
-* Output format
-* Whether metadata should be preserved
+- UI components handle user interaction
+- The compressor engine handles image processing
+- Metadata modules manage EXIF information
+- DragDrop handles file importing
 
 ---
 
-### 3. Edit Metadata (Optional)
+# How It Works
 
-If metadata preservation is enabled, users may edit metadata before compression.
+## 1. Import Image
 
-Editable fields include:
+Users drag an image into the application window.
 
-* Camera Model
-* Artist
-* Description
-* Copyright
-* Date Taken
+The application automatically:
 
----
-
-### 4. Compress
-
-The application:
-
-* Reads the original image
-* Resizes it if necessary
-* Compresses it using the selected quality
-* Writes the selected metadata
-* Generates a compressed preview
+- Detects the file type
+- Loads the image
+- Displays a preview
 
 ---
 
-### 5. Save
+## 2. Configure Optimization Settings
 
-The user can choose the filename and destination using the Download button.
+Users can customize:
 
----
-
-## Learning Objectives
-
-This project was developed to gain experience with:
-
-* Desktop GUI development
-* Object-oriented programming
-* Python project organization
-* Image manipulation
-* File handling
-* EXIF metadata management
-* Event-driven programming
-* Modular software architecture
+- Compression quality
+- Output resolution
+- File format
+- Metadata preservation options
 
 ---
 
-## Future Improvements
+## 3. Modify Metadata
 
-Some planned improvements include:
+Optional metadata editing allows users to change:
 
-* Batch image compression
-* Folder compression
-* Drag-and-drop multiple files
-* Image size comparison
-* Compression statistics
-* Before/after file size graphs
-* Dark mode
-* Undo functionality
-* Custom output folder selection
-* More editable EXIF fields
-* TIFF and HEIC support
-* Better metadata handling for PNG and WEBP
-* Progress indicators during compression
+- Camera information
+- Artist details
+- Description
+- Copyright
+- Date information
 
 ---
 
-## Screenshots
+## 4. Compression Process
 
-<img width="1010" height="732" alt="Screenshot 2026-07-27 at 22 48 33" src="https://github.com/user-attachments/assets/bf88d389-2b7c-49c4-bcd6-866e2f25f906" />
-<img width="1005" height="728" alt="Screenshot 2026-07-27 at 22 48 54" src="https://github.com/user-attachments/assets/d946e65e-9f40-4fb4-84d2-e2cf41d7dc4e" />
-<img width="999" height="728" alt="Screenshot 2026-07-27 at 22 51 06" src="https://github.com/user-attachments/assets/949a5953-f181-46b8-9482-f01b752a52ed" />
+The compression engine:
 
-
+1. Loads the original image
+2. Applies resizing if selected
+3. Converts the image format if needed
+4. Compresses using the chosen quality level
+5. Applies metadata changes
+6. Generates a preview result
 
 ---
 
-## Installation
+## 5. Export
 
-Clone the repository:
+Users can select the destination location and save the optimized image.
+
+---
+
+# Installation
+
+## Clone Repository
 
 ```bash
 git clone https://github.com/yourusername/DECompressor.git
+
 cd DECompressor
 ```
 
-Install the required packages:
+---
+
+## Install Dependencies
+
+Recommended:
+
+```bash
+python -m venv venv
+```
+
+Activate environment:
+
+### macOS / Linux
+
+```bash
+source venv/bin/activate
+```
+
+### Windows
+
+```bash
+venv\Scripts\activate
+```
+
+Install requirements:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Run the application:
+---
+
+## Run Application
 
 ```bash
 python UI.py
@@ -184,7 +210,7 @@ python UI.py
 
 ---
 
-## Requirements
+# Requirements
 
 ```
 Python 3.10+
@@ -195,17 +221,68 @@ piexif
 
 ---
 
-## Author
+# Screenshots
 
-**Doruk Ersoy**
+<img width="1010" height="732" alt="DECompressor Interface" src="https://github.com/user-attachments/assets/bf88d389-2b7c-49c4-bcd6-866e2f25f906" />
 
-Developed as a personal software engineering project to explore Python desktop application development, image processing, and modular GUI design.
+<img width="1005" height="728" alt="Compression Controls" src="https://github.com/user-attachments/assets/d946e65e-9f40-4fb4-84d2-e2cf41d7dc4e" />
+
+<img width="999" height="728" alt="Metadata Editing" src="https://github.com/user-attachments/assets/949a5953-f181-46b8-9482-f01b752a52ed" />
 
 ---
 
-## License
+# Learning Objectives
 
-Copyright © 2026 Doruk Ersoy. All rights reserved.
+This project helped develop experience in:
 
-This project is the intellectual property of Doruk Ersoy and is provided for portfolio and educational purposes only. No part of this project may be copied, modified, distributed, or used commercially without prior written permission from the author.
+- Desktop application development
+- GUI architecture
+- Object-oriented programming
+- Image processing algorithms
+- File management
+- EXIF metadata manipulation
+- Event-driven programming
+- Modular software design
 
+---
+
+# Future Improvements
+
+Planned improvements:
+
+- Batch image compression
+- Folder-level optimization
+- Multiple image drag-and-drop
+- Compression statistics
+- Before/after size comparison
+- Compression graphs
+- Dark mode
+- Undo system
+- Custom export locations
+- More EXIF fields
+- TIFF and HEIC support
+- Improved PNG and WEBP metadata handling
+- Compression progress indicators
+
+---
+
+# Author
+
+## Doruk Ersoy
+
+Developed as a personal software engineering project exploring:
+
+- Python desktop applications
+- Image optimization
+- GUI engineering
+- File processing systems
+
+---
+
+# License
+
+Copyright © 2026 Doruk Ersoy
+
+All rights reserved.
+
+This project is provided for educational and portfolio purposes. No part of this software may be copied, modified, distributed, or used commercially without explicit written permission from the author.
