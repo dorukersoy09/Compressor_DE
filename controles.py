@@ -7,7 +7,8 @@ from PyQt5.QtWidgets import (
     QPushButton,
     QSpinBox,
     QCheckBox,
-    QLabel
+    QLabel,
+    QTextEdit
 )
 from PyQt5.QtCore import Qt
 from MetadataWidget import MetadataWidget
@@ -25,8 +26,10 @@ class ControlsWidget(QWidget):
         else:
             self.metadataWidget.hide()
 
-    def __init__(self):
+    def __init__(self, mode="standalone"):
         super().__init__()
+        self.mode = mode
+
         # QUALITY
         self.qualitySlider = QSlider(Qt.Horizontal)
         self.qualitySlider.setRange(0,100)
@@ -49,6 +52,13 @@ class ControlsWidget(QWidget):
         # BUTTONS
         self.compressPushButton = QPushButton("Compress")
         self.downloadButton = QPushButton("Download")
+        # Text Box for messenger mode
+        if self.mode == "messenger":
+            self.captionBox = QTextEdit()
+            self.captionBox.setPlaceholderText(
+                "Write a caption..."
+            )
+            self.captionBox.setFixedHeight(80)
         # LAYOUT
         layout = QVBoxLayout()
         qualityLayout = QHBoxLayout()
@@ -61,6 +71,8 @@ class ControlsWidget(QWidget):
         # metadata between checkbox and compress
         layout.addWidget(self.metadataWidget)
         layout.addWidget(self.compressPushButton)
+        if self.mode == "messenger":
+            layout.addWidget(self.captionBox)
         layout.addWidget(self.downloadButton)
         layout.addStretch()
         self.setLayout(layout)
