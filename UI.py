@@ -1,4 +1,5 @@
 import sys
+from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import (
     QApplication,
     QWidget,
@@ -7,27 +8,44 @@ from PyQt5.QtWidgets import (
     QFileDialog,
     QMessageBox
 )
+import requests
 import metadata
 import compressor
+import api_client
 from dragdrop import DragDropWidget
 from controles import ControlsWidget
 
 
 class MainWindow(QWidget):
-    def __init__(self):
+    def __init__(
+        self,
+        mode="standalone",
+        sender="",
+        receiver=""
+    ):
         super().__init__()
+        self.mode = mode
+        self.sender = sender
+        self.receiver = receiver
+
         self.setWindowTitle(
             "DECompressor"
         )
-        self.resize(
-            1000,
-            700
-        )
+        if self.mode == "messenger":
+            self.resize(
+                1100,
+                700
+            )
+        else:
+            self.resize(
+                1000,
+                700
+            )
         mainLayout = QHBoxLayout()
         # LEFT SIDE
         self.dragDrop = DragDropWidget()
         # RIGHT SIDE
-        self.controls = ControlsWidget()
+        self.controls = ControlsWidget(self.mode)
         separator = QFrame()
         separator.setFrameShape(QFrame.VLine)
         separator.setFrameShadow(QFrame.Sunken)
@@ -38,9 +56,18 @@ class MainWindow(QWidget):
         self.controls.compressPushButton.clicked.connect(
             self.compress_image
         )
-        self.controls.downloadButton.clicked.connect(
-            self.download_image
-        )
+        if self.mode == "messenger":
+            self.controls.downloadButton.setText(
+                "Send"
+            )
+            self.controls.downloadButton.clicked.connect(
+                self.send_image
+            )
+        else:
+            self.controls.downloadButton.clicked.connect(
+                self.download_image
+            )
+
         # When image is dropped
         self.dragDrop.imageLabel.imageDropped.connect(
             self.load_metadata
@@ -48,6 +75,29 @@ class MainWindow(QWidget):
         self.setLayout(
             mainLayout
         )
+    
+    def send_image(self):
+        caption = self.controls.captionBox.toPlainText()
+        if not hasattr(
+            self,
+            "compressed_path"
+        ):
+            QMessageBox.warning(
+                self,
+                "Error",
+                "Compress an image first"
+            )
+            return
+        result = api_client.send_image(
+            self.sender,
+            self.receiver,
+            caption,
+            self.compressed_path
+        )
+        print(result)
+        if result.get("success"):
+            self.close()
+
 
     def load_metadata(self):
         path = self.dragDrop.imageLabel.file_path
@@ -105,10 +155,45 @@ class MainWindow(QWidget):
 
 app = QApplication(sys.argv)
 
-window = MainWindow()
+import argparse
+
+parser = argparse.ArgumentParser()
+
+parser.add_argument(
+    "--mode",
+    default="standalone"
+)
+
+parser.add_argument(
+    "--sender",
+    default=""
+)
+
+parser.add_argument(
+    "--receiver",
+    default=""
+)
+
+args = parser.parse_args()
+
+window = MainWindow(
+    args.mode,
+    args.sender,
+    args.receiver
+)
+
+
+if args.mode == "messenger":
+
+    window.setWindowTitle(
+        "JavaFXEncryptor - Image Compressor"
+    )
+
+    window.setWindowFlags(
+        Qt.Window
+    )
+
 
 window.show()
 
-sys.exit(
-    app.exec()
-)
+sys.exit(app.exec_())
